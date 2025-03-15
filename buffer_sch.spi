@@ -1,0 +1,22 @@
+*** SPICE deck for cell buffer_sch{sch} from library Inverter
+*** Created on Thu Apr 04, 2024 23:19:43
+*** Last revised on Fri Apr 05, 2024 03:26:10
+*** Written on Fri Apr 05, 2024 03:33:13 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Inverter__buffer FROM CELL buffer{sch}
+.SUBCKT Inverter__buffer A Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 net@22 A gnd gnd NMOS L=0.4U W=2U
+Mnmos@1 Y net@22 gnd gnd NMOS L=0.4U W=2U
+Mpmos@0 vdd A net@22 vdd PMOS L=0.4U W=2U
+Mpmos@1 vdd net@22 Y vdd PMOS L=0.4U W=2U
+.ENDS Inverter__buffer
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: buffer_sch{sch}
+Xbuffer@2 A Y Inverter__buffer
+.END

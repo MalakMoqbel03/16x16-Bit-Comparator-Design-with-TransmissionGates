@@ -1,0 +1,29 @@
+Circuit: *** SPICE deck for cell Inv{lay} from library Inverter
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Direct Newton iteration for .op point succeeded.
+
+tf=8.62049e-008 FROM 1.37951e-008 TO 1e-007
+tr=4.46214e-008 FROM 5.53786e-008 TO 1e-007
+
+
+Date: Thu Apr 04 18:49:57 2024
+Total elapsed time: 0.084 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2116
+traniter = 2108
+tranpoints = 1054
+accept = 1054
+rejected = 0
+matrix size = 5
+fillins = 0
+solver = Normal
+Matrix Compiler1: 204 bytes object code size  0.1/0.1/[0.0]
+Matrix Compiler2: 311 bytes object code size  0.1/0.1/[0.1]
+

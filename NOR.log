@@ -1,0 +1,29 @@
+Circuit: *** SPICE deck for cell NOR{lay} from library 3_Input_NOR
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Direct Newton iteration for .op point succeeded.
+
+tf=1.87128e-007 FROM 1.28722e-008 TO 2e-007
+tr=4.25579e-008 FROM 1.57442e-007 TO 2e-007
+
+
+Date: Sat Apr 27 06:42:41 2024
+Total elapsed time: 0.178 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2317
+traniter = 2306
+tranpoints = 1084
+accept = 1082
+rejected = 2
+matrix size = 11
+fillins = 0
+solver = Normal
+Matrix Compiler1: 450 bytes object code size  0.4/0.4/[0.1]
+Matrix Compiler2: 1.00 KB object code size  0.3/0.6/[0.2]
+

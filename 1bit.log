@@ -1,0 +1,32 @@
+LTspice 24.0.9 for Windows
+Circuit: *** SPICE deck for cell 1bit{sch} from library 1bit
+Start Time: Tue May 28 01:45:49 2024
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = modified trap
+vx2: Removing PWL point (2e-08,0)
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Direct Newton iteration for .op point succeeded.
+
+tf=1.65635e-07 FROM 3.43646e-08 TO 2e-07
+tr=1.83914e-07 FROM 1.60865e-08 TO 2e-07
+tf1=1.50547e-07 FROM 4.94528e-08 TO 2e-07
+tr1=1.62905e-07 FROM 3.7095e-08 TO 2e-07
+tf2=1.81889e-07 FROM 1.81107e-08 TO 2e-07
+tr2=1.64355e-07 FROM 3.5645e-08 TO 2e-07
+
+Total elapsed time: 0.809 seconds.
+

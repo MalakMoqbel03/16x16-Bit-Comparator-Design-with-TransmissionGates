@@ -1,0 +1,46 @@
+*** SPICE deck for cell Mux2to1{sch} from library Mux2to1
+*** Created on Tue Jun 11, 2024 17:57:27
+*** Last revised on Sat Jun 15, 2024 16:18:15
+*** Written on Sat Jun 15, 2024 16:19:45 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Inverter__Inv FROM CELL Inverter:Inv{sch}
+.SUBCKT Inverter__Inv A Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y A gnd gnd NMOS L=0.4U W=2U
+Mpmos@0 vdd A Y vdd PMOS L=0.4U W=2U
+.ENDS Inverter__Inv
+
+*** SUBCIRCUIT _2_Input_NAND__NAND FROM CELL 2_Input_NAND:NAND{sch}
+.SUBCKT _2_Input_NAND__NAND X1 X2 Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y X1 net@16 gnd NMOS L=0.4U W=1.2U
+Mnmos@1 net@16 X2 gnd gnd NMOS L=0.4U W=1.2U
+Mpmos@1 vdd X2 Y vdd PMOS L=0.4U W=2.4U
+Mpmos@2 vdd X1 Y vdd PMOS L=0.4U W=2.4U
+.ENDS _2_Input_NAND__NAND
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: Mux2to1:Mux2to1{sch}
+XInv@0 S sPrime Inverter__Inv
+XNAND@0 X2 S net@67 _2_Input_NAND__NAND
+XNAND@1 sPrime X1 net@65 _2_Input_NAND__NAND
+XNAND@2 net@67 net@65 F _2_Input_NAND__NAND
+
+* Spice Code nodes in cell cell 'Mux2to1:Mux2to1{sch}'
+vdd vdd 0 DC 5
+Vx1 X1 0 pwl 10n 0 20n 5 50n 5 60n 0 90n 0 100n 5 130n 5 140n 0 170n 0 180n 5
+Vx2 X2 0 pwl 10n 0 20n 5 150n 5 160n 0
+VS S 0 pwl 0n 0 10n 0 20n 5 150n 5 160n 0
+cload sPrime 0 375fF,cload2 F 0 375fF
+.measure tran tf trig v(sPrime) val=4.5 fall=1 td=4ns trag v(sPrime) val=0.5 fall=1
+.measure tran tr trig v(sPrime) val=0.5 rise=1 td=4ns trag v(sPrime) val=4.5 rise=1
+.measure tran tf2 trig v(F) val=4.5 fall=1 td=4ns trag v(F) val=0.5 fall=1
+.measure tran tr2 trig v(F) val=0.5 rise=1 td=4ns trag v(F) val=4.5 rise=1
+.tran 200n
+.include C:\electric\C5_models.txt
+.END

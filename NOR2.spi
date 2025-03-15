@@ -1,0 +1,25 @@
+*** SPICE deck for cell NOR2{sch} from library NOR2
+*** Created on Thu May 23, 2024 22:11:27
+*** Last revised on Thu May 23, 2024 22:15:19
+*** Written on Thu May 23, 2024 22:15:24 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: NOR2:NOR2{sch}
+Mnmos@1 Y X1 gnd gnd NMOS L=0.6U W=1.8U
+Mnmos@2 Y X2 gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@1 vdd X1 net@20 vdd PMOS L=0.6U W=3.6U
+Mpmos@2 net@20 X2 Y vdd PMOS L=0.6U W=3.6U
+
+* Spice Code nodes in cell cell 'NOR2:NOR2{sch}'
+vdd vdd 0 DC 5
+vin X1 0 pwl 10n 0 20n 5 50n 5 60n 0
+vin1 X2 0 pwl 10n 5 20n 5 50n 5 60n 0
+cload Y 0 250fF
+.measure tran tf trig v(Y) val=4.5 fall=1 td=8ns trag v(Y) val=0.5 fall=1
+.measure tran tr trig v(Y) val=0.5 rise=1 td=50ns trag v(Y) val=4.5 rise=1
+.tran 0 0.1us
+.include C:\Electric\C5_models.txt
+.END

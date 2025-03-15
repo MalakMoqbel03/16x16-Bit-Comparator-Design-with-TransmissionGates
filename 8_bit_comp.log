@@ -1,0 +1,41 @@
+Circuit: *** SPICE deck for cell 8_bit_comp{lay} from library 8_bit_comparator
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Va7: Removing PWL point (1.3e-007,5)
+Va6: Removing PWL point (1.2e-007,5)
+Va5: Removing PWL point (1.1e-007,5)
+Va4: Removing PWL point (1e-007,5)
+Va3: Removing PWL point (9e-008,5)
+Va2: Removing PWL point (8e-008,5)
+Va1: Removing PWL point (7e-008,5)
+Va0: Removing PWL point (6e-008,5)
+WARNING: Node NET@3293 is floating.
+WARNING: Node NET@3344 is floating.
+
+Direct Newton iteration for .op point succeeded.
+
+tf_comp=7.43576e-009 FROM 1.92126e-007 TO 1.99562e-007
+tr_comp=1.27944e-008 FROM 1.59305e-007 TO 1.72099e-007
+
+
+Date: Sat Jun 15 01:02:05 2024
+Total elapsed time: 0.536 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 7652
+traniter = 7629
+tranpoints = 2448
+accept = 2022
+rejected = 426
+matrix size = 111
+fillins = 64
+solver = Normal
+Thread vector: 84.1/22.8[16] 20.9/7.4[16] 7.4/2.4[16] 0.8/2.1[1]  2592/500
+Matrix Compiler1: 17.85 KB object code size  3.7/2.0/[1.1]
+Matrix Compiler2: 15.01 KB object code size  1.7/1.9/[0.8]
+

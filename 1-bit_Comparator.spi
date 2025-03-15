@@ -1,0 +1,62 @@
+*** SPICE deck for cell 1-bit_Comparator{sch} from library 1-bit_Comparator
+*** Created on Thu May 23, 2024 14:44:52
+*** Last revised on Tue May 28, 2024 01:42:35
+*** Written on Sat Jun 15, 2024 14:54:37 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Inverter__Inv FROM CELL Inverter:Inv{sch}
+.SUBCKT Inverter__Inv A Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y A gnd gnd NMOS L=0.6U W=3U
+Mpmos@0 vdd A Y vdd PMOS L=0.6U W=3U
+.ENDS Inverter__Inv
+
+*** SUBCIRCUIT _3_Input_NAND__NAND FROM CELL 3_Input_NAND:NAND{sch}
+.SUBCKT _3_Input_NAND__NAND X1 X2 Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y X1 net@16 gnd NMOS L=0.6U W=1.8U
+Mnmos@1 net@16 X2 gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@1 vdd X2 Y vdd PMOS L=0.6U W=3.6U
+Mpmos@2 vdd X1 Y vdd PMOS L=0.6U W=3.6U
+.ENDS _3_Input_NAND__NAND
+
+*** SUBCIRCUIT _3_Input_NOR__NOR FROM CELL 3_Input_NOR:NOR{sch}
+.SUBCKT _3_Input_NOR__NOR X2 X3 Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y X3 Y gnd NMOS L=0.6U W=1.8U
+Mnmos@1 Y X2 gnd gnd NMOS L=0.6U W=1.8U
+Mpmos@1 vdd X2 net@2 vdd PMOS L=0.6U W=3.6U
+Mpmos@2 net@2 X3 Y vdd PMOS L=0.6U W=3.6U
+.ENDS _3_Input_NOR__NOR
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 1-bit_Comparator{sch}
+XInv@0 B net@44 Inverter__Inv
+XInv@1 net@42 ABprime Inverter__Inv
+XInv@2 net@47 AprimeB Inverter__Inv
+XInv@4 A net@75 Inverter__Inv
+XNAND@0 net@44 A net@42 _3_Input_NAND__NAND
+XNAND@1 B net@75 net@47 _3_Input_NAND__NAND
+XNOR@0 ABprime AprimeB EQ _3_Input_NOR__NOR
+
+* Spice Code nodes in cell cell '1-bit_Comparator{sch}'
+vdd vdd 0 DC 5
+Vx1 B 0 pwl 10n 0 20n 5 50n 5 60n 0 90n 0 100n 5 130n 5 140n 0 170n 0 180n 5
+Vx2 A 0 pwl 10n 0 20n 5 150n 5 160n 0
+cload ABprime 0 375fF
+cload1 AprimeB 0 375fF
+cload2 EQ 0 375fF
+.measure tran tf trig v(ABprime) val=4.5 fall=1 td=4ns trag v(ABprime) val=0.5 fall=1
+.measure tran tr trig v(ABprime) val=0.5 rise=1 td=4ns trag v(ABprime) val=4.5 rise=1
+.measure tran tf1 trig v(AprimeB) val=4.5 fall=1 td=4ns trag v(AprimeB) val=0.5 fall=1
+.measure tran tr1 trig v(AprimeB) val=0.5 rise=1 td=4ns trag v(AprimeB) val=4.5 rise=1
+.measure tran tf2 trig v(EQ) val=4.5 fall=1 td=4ns trag v(EQ) val=0.5 fall=1
+.measure tran tr2 trig v(EQ) val=0.5 rise=1 td=4ns trag v(EQ) val=4.5 rise=1
+.tran 200n
+.include C:\electric\C5_models.txt
+.END

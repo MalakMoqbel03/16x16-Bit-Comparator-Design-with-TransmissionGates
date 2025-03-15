@@ -1,0 +1,45 @@
+*** SPICE deck for cell A(Bprime){sch} from library 1-bit_Comparator
+*** Created on Thu May 23, 2024 14:44:52
+*** Last revised on Thu May 23, 2024 21:34:38
+*** Written on Thu May 23, 2024 21:34:55 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Inverter__Inv FROM CELL Inv{sch}
+.SUBCKT Inverter__Inv A Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y A gnd gnd NMOS L=0.4U W=2U
+Mpmos@0 vdd A Y vdd PMOS L=0.4U W=2U
+.ENDS Inverter__Inv
+
+*** SUBCIRCUIT _3_Input_NAND__NAND FROM CELL 3_Input_NAND:NAND{sch}
+.SUBCKT _3_Input_NAND__NAND X1 X2 Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y X1 net@16 gnd NMOS L=0.4U W=1.2U
+Mnmos@1 net@16 X2 gnd gnd NMOS L=0.4U W=1.2U
+Mpmos@1 vdd X2 Y vdd PMOS L=0.4U W=2.4U
+Mpmos@2 vdd X1 Y vdd PMOS L=0.4U W=2.4U
+.ENDS _3_Input_NAND__NAND
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 1-bit_Comparator:A(Bprime){sch}
+XInv@0 B net@44 Inverter__Inv
+XInv@1 net@42 ABprime Inverter__Inv
+XInv@2 net@47 AprimeB Inverter__Inv
+XInv@4 A net@75 Inverter__Inv
+XNAND@0 net@44 A net@42 _3_Input_NAND__NAND
+XNAND@1 B net@75 net@47 _3_Input_NAND__NAND
+
+* Spice Code nodes in cell cell '1-bit_Comparator:A(Bprime){sch}'
+vdd vdd 0 DC 5
+Vx1 B 0 pwl 10n 0 20n 5 30n 5 40n 5 60n 0 
+Vx2 A 0 pwl 10n 5 20n 0 30n 0 40n 5 60n 5
+cload ABprime 0 375fF
+.measure tran tf trig v(ABprime) val=4.5 fall=1 td=4ns trag v(ABprime) val=0.5 fall=1
+.measure tran tr trig v(ABprime) val=0.5 rise=1 td=4ns trag v(ABprime) val=4.5 rise=1
+.tran 200n
+.include C:\electric\C5_models.txt 
+.END

@@ -1,0 +1,23 @@
+# header information:
+Hfinal_project|9.07
+
+# Views:
+Vlayout|lay
+
+# External Libraries:
+
+LmuddLib07|muddLib07
+
+# Technologies:
+Tmocmos|ScaleFORmocmos()D300.0
+
+# Cell 1-bit-comparator;1{lay}
+C1-bit-comparator;1{lay}||mocmos|1716805734926|1716808211601||DRC_last_good_drc_area_date()G1716807965016|DRC_last_good_drc_bit()I18|DRC_last_good_drc_date()G1716806722012
+ImuddLib07:and2_1x;1{lay}|and2_1x@0||-202|-31|||D5G4;
+ImuddLib07:and2_1x;1{lay}|and2_1x@1||-72|-133|||D5G4;
+Ngeneric:Facet-Center|art@0||0|0||||AV
+ImuddLib07:inv_1_5x;1{lay}|inv_1_5x@0||-237|-32|||D5G4;
+ImuddLib07:inv_1_5x;1{lay}|inv_1_5x@1||-154|-31.5|||D5G4;
+ImuddLib07:nor2_1x;1{lay}|nor2_1x@0||-9|-67|||D5G4;
+Ngeneric:Invisible-Pin|pin@0||-204|-55|||||SIM_spice_card(D5G1;)Stext
+X

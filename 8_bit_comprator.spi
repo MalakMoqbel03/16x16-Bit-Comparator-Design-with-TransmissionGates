@@ -1,0 +1,144 @@
+*** SPICE deck for cell 8_bit_comprator{sch} from library 8_bit_comparator
+*** Created on Tue Jun 11, 2024 19:59:14
+*** Last revised on Sat Jun 15, 2024 16:10:14
+*** Written on Sat Jun 15, 2024 16:11:17 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Inverter__Inv FROM CELL Inverter:Inv{sch}
+.SUBCKT Inverter__Inv A Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y A gnd gnd NMOS L=0.4U W=2U
+Mpmos@0 vdd A Y vdd PMOS L=0.4U W=2U
+.ENDS Inverter__Inv
+
+*** SUBCIRCUIT _2_Input_NAND__NAND FROM CELL 2_Input_NAND:NAND{sch}
+.SUBCKT _2_Input_NAND__NAND X1 X2 Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y X1 net@16 gnd NMOS L=0.4U W=1.2U
+Mnmos@1 net@16 X2 gnd gnd NMOS L=0.4U W=1.2U
+Mpmos@1 vdd X2 Y vdd PMOS L=0.4U W=2.4U
+Mpmos@2 vdd X1 Y vdd PMOS L=0.4U W=2.4U
+.ENDS _2_Input_NAND__NAND
+
+*** SUBCIRCUIT Mux2to1__Mux2to1 FROM CELL Mux2to1:Mux2to1{sch}
+.SUBCKT Mux2to1__Mux2to1 F S sPrime X1 X2
+** GLOBAL gnd
+** GLOBAL vdd
+XInv@0 S sPrime Inverter__Inv
+XNAND@0 X2 S net@67 _2_Input_NAND__NAND
+XNAND@1 sPrime X1 net@65 _2_Input_NAND__NAND
+XNAND@2 net@67 net@65 F _2_Input_NAND__NAND
+.ENDS Mux2to1__Mux2to1
+
+*** SUBCIRCUIT _2_Input_NOR__NOR FROM CELL 2_Input_NOR:NOR{sch}
+.SUBCKT _2_Input_NOR__NOR X2 X3 Y
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Y X3 Y gnd NMOS L=0.4U W=1.2U
+Mnmos@1 Y X2 gnd gnd NMOS L=0.4U W=1.2U
+Mpmos@1 vdd X2 net@2 vdd PMOS L=0.4U W=2.4U
+Mpmos@2 net@2 X3 Y vdd PMOS L=0.4U W=2.4U
+.ENDS _2_Input_NOR__NOR
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 8_bit_comprator{sch}
+XInv@0 B7 B7prime Inverter__Inv
+XInv@1 net@8 net@187 Inverter__Inv
+XInv@2 net@18 net@198 Inverter__Inv
+XInv@3 B6 B6prime Inverter__Inv
+XInv@4 net@45 net@202 Inverter__Inv
+XInv@5 net@30 net@206 Inverter__Inv
+XInv@6 B5 B5prime Inverter__Inv
+XInv@7 net@83 net@209 Inverter__Inv
+XInv@8 net@49 net@213 Inverter__Inv
+XInv@9 B4 B4prime Inverter__Inv
+XInv@10 net@78 net@232 Inverter__Inv
+XInv@11 net@62 net@236 Inverter__Inv
+XInv@12 B3 B3prime Inverter__Inv
+XInv@13 net@132 net@239 Inverter__Inv
+XInv@14 net@141 net@243 Inverter__Inv
+XInv@15 B2 B2prime Inverter__Inv
+XInv@16 net@95 net@256 Inverter__Inv
+XInv@17 net@154 net@260 Inverter__Inv
+XInv@18 B1 B1prime Inverter__Inv
+XInv@19 net@136 net@264 Inverter__Inv
+XInv@20 net@98 net@268 Inverter__Inv
+XInv@21 B0 B0prime Inverter__Inv
+XInv@22 net@333 net@272 Inverter__Inv
+XMux2to1@0 net@275 net@202 Mux2to1@0_sPrime net@198 net@187 Mux2to1__Mux2to1
+XMux2to1@1 net@286 net@206 Mux2to1@1_sPrime net@198 net@187 Mux2to1__Mux2to1
+XMux2to1@4 net@278 net@232 Mux2to1@4_sPrime net@213 net@209 Mux2to1__Mux2to1
+XMux2to1@5 net@297 net@236 Mux2to1@5_sPrime net@213 net@209 Mux2to1__Mux2to1
+XMux2to1@6 net@302 net@256 Mux2to1@6_sPrime net@243 net@239 Mux2to1__Mux2to1
+XMux2to1@7 net@304 net@260 Mux2to1@7_sPrime net@243 net@239 Mux2to1__Mux2to1
+XMux2to1@8 net@311 net@272 Mux2to1@8_sPrime net@268 net@264 Mux2to1__Mux2to1
+XMux2to1@10 net@355 net@278 Mux2to1@10_sPrime net@286 net@275 Mux2to1__Mux2to1
+XMux2to1@11 net@314 net@297 Mux2to1@11_sPrime net@286 net@275 Mux2to1__Mux2to1
+XMux2to1@12 net@318 net@311 Mux2to1@12_sPrime net@304 net@302 Mux2to1__Mux2to1
+XMux2to1@13 Comp net@318 Mux2to1@13_sPrime net@314 net@355 Mux2to1__Mux2to1
+XNAND@0 A7 B7prime net@18 _2_Input_NAND__NAND
+XNAND@1 A6 B6prime net@30 _2_Input_NAND__NAND
+XNAND@2 A5 B5prime net@49 _2_Input_NAND__NAND
+XNAND@3 A4 B4prime net@62 _2_Input_NAND__NAND
+XNAND@4 A3 B3prime net@141 _2_Input_NAND__NAND
+XNAND@5 A2 B2prime net@154 _2_Input_NAND__NAND
+XNAND@6 A1 B1prime net@98 _2_Input_NAND__NAND
+XNOR@0 A7 B7prime net@8 _2_Input_NOR__NOR
+XNOR@1 A6 B6prime net@45 _2_Input_NOR__NOR
+XNOR@2 A5 B5prime net@83 _2_Input_NOR__NOR
+XNOR@3 A4 B4prime net@78 _2_Input_NOR__NOR
+XNOR@4 A3 B3prime net@132 _2_Input_NOR__NOR
+XNOR@5 A2 B2prime net@95 _2_Input_NOR__NOR
+XNOR@6 A1 B1prime net@136 _2_Input_NOR__NOR
+XNOR@7 A0 B0prime net@333 _2_Input_NOR__NOR
+
+* Spice Code nodes in cell cell '8_bit_comprator{sch}'
+* Define Power Supply
+Vdd vdd 0 DC 5
+* Define Pulse Sources for Nodes A0 to A7 with trapezoidal waveforms
+Va0 A0 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Va1 A1 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Va2 A2 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Va3 A3 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Va4 A4 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Va5 A5 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Va6 A6 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Va7 A7 0 pwl 0n 5 20n 0 60n 0 100n 5 140n 5 180n 0 220n 0 260n 5 300n 5 340n 0 380n 0 420n 5
+* Define Pulse Sources for Nodes B0 to B7 with trapezoidal waveforms
+Vb0 B0 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Vb1 B1 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Vb2 B2 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Vb3 B3 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Vb4 B4 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Vb5 B5 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Vb6 B6 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+Vb7 B7 0 pwl 0n 0 20n 5 60n 5 100n 0 140n 0 180n 5 220n 5 260n 0 300n 0 340n 5 380n 5 420n 0
+cload_Comp Comp 0 375fF
+* Define Measurements for Nodes B0prime to B7prime
+.measure tran tf_B0prime trig v(B0prime) val=4.5 fall=1 td=4ns targ v(B0prime) val=0.5 fall=1
+.measure tran tr_B0prime trig v(B0prime) val=0.5 rise=1 td=4ns targ v(B0prime) val=4.5 rise=1
+.measure tran tf_B1prime trig v(B1prime) val=4.5 fall=1 td=4ns targ v(B1prime) val=0.5 fall=1
+.measure tran tr_B1prime trig v(B1prime) val=0.5 rise=1 td=4ns targ v(B1prime) val=4.5 rise=1
+.measure tran tf_B2prime trig v(B2prime) val=4.5 fall=1 td=4ns targ v(B2prime) val=0.5 fall=1
+.measure tran tr_B2prime trig v(B2prime) val=0.5 rise=1 td=4ns targ v(B2prime) val=4.5 rise=1
+.measure tran tf_B3prime trig v(B3prime) val=4.5 fall=1 td=4ns targ v(B3prime) val=0.5 fall=1
+.measure tran tr_B3prime trig v(B3prime) val=0.5 rise=1 td=4ns targ v(B3prime) val=4.5 rise=1
+.measure tran tf_B4prime trig v(B4prime) val=4.5 fall=1 td=4ns targ v(B4prime) val=0.5 fall=1
+.measure tran tr_B4prime trig v(B4prime) val=0.5 rise=1 td=4ns targ v(B4prime) val=4.5 rise=1
+.measure tran tf_B5prime trig v(B5prime) val=4.5 fall=1 td=4ns targ v(B5prime) val=0.5 fall=1
+.measure tran tr_B5prime trig v(B5prime) val=0.5 rise=1 td=4ns targ v(B5prime) val=4.5 rise=1
+.measure tran tf_B6prime trig v(B6prime) val=4.5 fall=1 td=4ns targ v(B6prime) val=0.5 fall=1
+.measure tran tr_B6prime trig v(B6prime) val=0.5 rise=1 td=4ns targ v(B6prime) val=4.5 rise=1
+.measure tran tf_B7prime trig v(B7prime) val=4.5 fall=1 td=4ns targ v(B7prime) val=0.5 fall=1
+.measure tran tr_B7prime trig v(B7prime) val=0.5 rise=1 td=4ns targ v(B7prime) val=4.5 rise=1
+* Define Measurements for Node Comp
+.measure tran tf_Comp trig v(Comp) val=4.5 fall=1 td=4ns targ v(Comp) val=0.5 fall=1
+.measure tran tr_Comp trig v(Comp) val=0.5 rise=1 td=4ns targ v(Comp) val=4.5 rise=1
+* Set up transient analysis
+.tran 200n
+.include C:\electric\C5_models.txt 
+.END
